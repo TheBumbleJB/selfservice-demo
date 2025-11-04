@@ -4,54 +4,66 @@ metadata:
   name: v1beta3-demo
   title: Test Action template
   description: scaffolder v1beta3 template demo
+  namespace: default
 spec:
   owner: John Bramble
   type: service
-
+  presentation:
+    buttonLabels:
+      backButtonText: 'Return'
+      createButtonText: 'Update'
+      reviewButtonText: 'Verify'
   parameters:
-  - title: Template Demo Test
-    required:
-      - token
-      - multiline
-    properties:
-      ipAddresses:
-        title: Enter IP Addresses
-        type: string
-        description: Enter IP addresses seperated by new line
-        pattern: '^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(?:\n|$))+$'
-        ui:widget: textarea
-        ui:options:
-          rows: 10
-        ui:help: 'Hint: Make it strong!'
-        ui:placeholder: |
-          apiVersion: backstage.io/v1alpha1
-            kind: Component
-            metadata:
-              name: backstage
-            spec:
-              type: library
-              owner: CNCF
-              lifecycle: experimental
-      token:
-          title: Token
+    - title: Template Demo Test
+      required:
+        - token
+        - multiline
+      properties:
+        token:
+            title: Token
+            type: string
+            description: Oauth2 token
+            ui:field: AAPTokenField
+            ui:widget: hidden
+            ui:backstage:
+              review:
+                show: false
+        ipAddresses:
+          title: Enter IP Addresses
           type: string
-          description: Oauth2 token
-          ui:field: AAPTokenField
-          ui:widget: hidden
-          ui:backstage:
-            review:
-              show: false
-
+          description: Enter IP addresses seperated by new line
+          pattern: '^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(?:\n|$))+$'
+          ui:widget: textarea
+          ui:options:
+            rows: 10
+          ui:help: 'Hint: Make it strong!'
+          ui:placeholder: |
+            apiVersion: backstage.io/v1alpha1
+              kind: Component
+              metadata:
+                name: backstage
+              spec:
+                type: library
+                owner: CNCF
+                lifecycle: experimental
+    - title: Review & Confirm
+        properties:
+          review:
+            type: string
+            title: 📝 Review Your Choices
+            description: |
+              Please review your selections before continuing.
+            default: "If everything looks correct, click Create to start the process."
   steps:
-  - id: launch-job
-    name: Template Validation demo
-    action: rhaap:launch-job-template
-    input:
-        token: ${{ parameters.token }}
-        values:
-          template: Self-Service Demo
-          extraVariables:
-            ipAddresses: ${{ parameters.ipAddresses }}
+    - id: launch-job
+      name: Template Validation demo
+      action: rhaap:launch-job-template
+      input:
+          token: ${{ parameters.token }}
+          values:
+            template: Self-Service Demo
+            extraVariables:
+              ipAddresses: ${{ parameters.ipAddresses }}
 
   output:
     text:
