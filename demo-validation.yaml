@@ -2,8 +2,8 @@ apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
   name: demo-validation
-  title: Test Action template
-  description: scaffolder v1beta3 template demo
+  title: Self-Service Demo - Validation
+  description: demo for imput validations
   namespace: default
 spec:
   owner: John Bramble
@@ -37,15 +37,6 @@ spec:
           ui:options:
             rows: 10
           ui:help: 'Hint: Make it strong!'
-          ui:placeholder: |
-            apiVersion: backstage.io/v1alpha1
-              kind: Component
-              metadata:
-                name: backstage
-              spec:
-                type: library
-                owner: CNCF
-                lifecycle: experimental
     - title: Review & Confirm
       properties:
         review:
