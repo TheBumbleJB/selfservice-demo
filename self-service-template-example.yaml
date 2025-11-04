@@ -1,0 +1,66 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: v1beta3-demo
+  title: Test Action template
+  description: scaffolder v1beta3 template demo
+spec:
+  owner: John Bramble
+  type: service
+
+  parameters:
+  - title: Template Demo Test
+    required:
+      - token
+      - multiline
+    properties:
+      ipAddresses:
+        title: Enter IP Addresses
+        type: string
+        description: Enter IP addresses seperated by new line
+        pattern: '^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(?:\n|$))+$'
+        ui:widget: textarea
+        ui:options:
+          rows: 10
+        ui:help: 'Hint: Make it strong!'
+        ui:placeholder: |
+          apiVersion: backstage.io/v1alpha1
+            kind: Component
+            metadata:
+              name: backstage
+            spec:
+              type: library
+              owner: CNCF
+              lifecycle: experimental
+      token:
+          title: Token
+          type: string
+          description: Oauth2 token
+          ui:field: AAPTokenField
+          ui:widget: hidden
+          ui:backstage:
+            review:
+              show: false
+
+  steps:
+  - id: launch-job
+    name: Template Validation demo
+    action: rhaap:launch-job-template
+    input:
+        token: ${{ parameters.token }}
+        values:
+          template: Self-Service Demo
+          extraVariables:
+            ipAddresses: ${{ parameters.ipAddresses }}
+
+  output:
+    text:
+      - title: Self-Service Demo Test
+        content: |
+          **Job ID:** ${{ steps['launch-job'].output.data.id }}
+          **Status:** ${{ steps['launch-job'].output.data.status }}
+
+          [View Details](${{ steps['launch-job'].output.data.url }})
+
+          ---
+          This was just a test
