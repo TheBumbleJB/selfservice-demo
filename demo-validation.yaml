@@ -1,7 +1,7 @@
 apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
-  name: Demo - Validation
+  name: demo-validation
   title: Test Action template
   description: scaffolder v1beta3 template demo
   namespace: default
