@@ -14,20 +14,20 @@ spec:
       createButtonText: 'Update'
       reviewButtonText: 'Verify'
   parameters:
-    title: Template Demo Test
+    - title: Template Demo Test
       required:
         - token
         - multiline
       properties:
         token:
-            title: Token
-            type: string
-            description: Oauth2 token
-            ui:field: AAPTokenField
-            ui:widget: hidden
-            ui:backstage:
-              review:
-                show: false
+          title: Token
+          type: string
+          description: Oauth2 token
+          ui:field: AAPTokenField
+          ui:widget: hidden
+          ui:backstage:
+            review:
+              show: false
         ipAddresses:
           title: Enter IP Addresses
           type: string
@@ -46,7 +46,7 @@ spec:
                 type: library
                 owner: CNCF
                 lifecycle: experimental
-    title: Review & Confirm
+    - title: Review & Confirm
       properties:
         review:
           type: string
