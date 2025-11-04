@@ -1,0 +1,10 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: selfservice-demo
+  annotations:
+    github.com/project-slug: TheBumbleJB/selfservice-demo
+spec:
+  type: other
+  lifecycle: unknown
+  owner: default
