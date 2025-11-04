@@ -17,7 +17,7 @@ spec:
     - title: Template Demo Test
       required:
         - token
-        - multiline
+        - ipAddresses
       properties:
         token:
           title: Token
