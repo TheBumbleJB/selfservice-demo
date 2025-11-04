@@ -14,7 +14,7 @@ spec:
       createButtonText: 'Update'
       reviewButtonText: 'Verify'
   parameters:
-    - title: Template Demo Test
+    title: Template Demo Test
       required:
         - token
         - multiline
@@ -46,14 +46,14 @@ spec:
                 type: library
                 owner: CNCF
                 lifecycle: experimental
-    - title: Review & Confirm
-        properties:
-          review:
-            type: string
-            title: 📝 Review Your Choices
-            description: |
-              Please review your selections before continuing.
-            default: "If everything looks correct, click Create to start the process."
+    title: Review & Confirm
+      properties:
+        review:
+          type: string
+          title: 📝 Review Your Choices
+          description: |
+            Please review your selections before continuing.
+          default: "If everything looks correct, click Create to start the process."
   steps:
     - id: launch-job
       name: Template Validation demo
